@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "id": "brandblock",
+  "version": "${version}",
+
+  "name": "BrandBlock",
+  "description": "Block certain client brands from joining your server",
+  "authors": [
+    "Londiuh"
+  ],
+  "contact": {
+    "homepage": "https://github.com/Londiuh/BrandBlock",
+    "sources": "https://github.com/Londiuh/BrandBlock"
+  },
+
+  "license": "MIT",
+
+  "environment": "server",
+  "entrypoints": {
+    "main": [
+      "me.londiuh.brandblock.BrandBlock"
+    ]
+  },
+  "mixins": [
+    "brandblock.mixins.json"
+  ],
+
+  "depends": {
+    "fabricloader": ">=0.11.3",
+    "fabric": "*",
+    "minecraft": "1.17.x",
+    "java": ">=16"
+  }
+}
