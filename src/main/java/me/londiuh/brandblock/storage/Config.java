@@ -11,7 +11,6 @@ import java.util.List;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
 
 import static me.londiuh.brandblock.BrandBlock.LOGGER;
@@ -28,7 +27,7 @@ public class Config {
 		try {
 			return Text.Serializer.fromJson(kickMsg);
 		} catch (Exception ignored) {
-			return new LiteralText(kickMsg);
+			return Text.of(kickMsg);
 		}
 	}
 
