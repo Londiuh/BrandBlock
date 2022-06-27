@@ -12,6 +12,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import net.minecraft.text.LiteralText;
+import net.minecraft.text.Text;
 
 import static me.londiuh.brandblock.BrandBlock.LOGGER;
 
@@ -23,9 +24,12 @@ public class Config {
 		return blockedBrands.contains(brand);
 	}
 
-	// TODO: JSON text
-	public LiteralText getKickMsg() {
-		return new LiteralText(kickMsg);
+	public Text getKickMsg() {
+		try {
+			return Text.Serializer.fromJson(kickMsg);
+		} catch (Exception ignored) {
+			return new LiteralText(kickMsg);
+		}
 	}
 
 	public static Config loadConfig(File file) {
