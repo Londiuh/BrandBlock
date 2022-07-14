@@ -1,5 +1,6 @@
 package me.londiuh.brandblock.mixin;
 
+import net.minecraft.network.packet.s2c.play.DisconnectS2CPacket;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -23,7 +24,7 @@ public abstract class ServerPlayNetworkHandlerMixin {
 	public void onCustomPayload(CustomPayloadC2SPacket packet, CallbackInfo ci) {
 		if (packet.getChannel().equals(CustomPayloadC2SPacket.BRAND) && CONFIG.isBlockedBrand(packet.getData().readString())) {
 			LOGGER.info("[BrandBlock] Kicked {}[{}] because is using a blocked brand", player.getEntityName(), connection.getAddress());
-			// TODO: fix clien't not showing disconnection reason
+			connection.send(new DisconnectS2CPacket(CONFIG.getKickMsg()));
 			connection.disconnect(CONFIG.getKickMsg());
 		}
 	}
