@@ -1,12 +1,12 @@
 {
-  "required": true,
-  "minVersion": "0.8",
-  "package": "me.londiuh.brandblock.mixin",
-  "compatibilityLevel": "JAVA_16",
-  "server": [
-    "ServerPlayNetworkHandlerMixin"
-  ],
-  "injectors": {
-    "defaultRequire": 1
-  }
+	"required": true,
+	"minVersion": "0.8",
+	"package": "me.londiuh.brandblock.mixin",
+	"compatibilityLevel": "JAVA_16",
+	"server": [
+		"ServerPlayNetworkHandlerMixin"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	}
 }
