@@ -3,7 +3,7 @@ Simple Fabric server-side mod to block certain client brands from joining your s
 
 ## Configuration
 `config/brandblock.json`
-```json
+```jsonc
 {
   "blockedBrands": [                             // All brands that will be blocked
     "forge",
