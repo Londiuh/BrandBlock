@@ -13,7 +13,6 @@ import net.minecraft.network.ClientConnection;
 import net.minecraft.network.listener.ServerCommonPacketListener;
 import net.minecraft.network.packet.BrandCustomPayload;
 import net.minecraft.network.packet.c2s.common.CustomPayloadC2SPacket;
-import net.minecraft.network.packet.s2c.common.DisconnectS2CPacket;
 import net.minecraft.server.network.ServerCommonNetworkHandler;
 import net.minecraft.text.Text;
 
@@ -29,17 +28,17 @@ public abstract class ServerCommonNetworkHandlerMixin implements ServerCommonPac
 	@Shadow
 	protected abstract GameProfile getProfile();
 
+	@Shadow
+	public abstract void disconnect(Text reason);
+
 	@Inject(at = @At("HEAD"), method = "onCustomPayload")
 	private void onCustomPayload(CustomPayloadC2SPacket packet, CallbackInfo ci) {
 		if (packet.payload() instanceof BrandCustomPayload payload && CONFIG.isBlockedBrand(payload.brand())) {
-			LOGGER.info("[BrandBlock] Kicked {}[{}] because is using a blocked brand", this.getProfile().getName(),
-					this.connection.getAddress());
-			Text reason = CONFIG.getKickMsg();
+			LOGGER.info("Disconnecting {} due to use of a blocked brand", this.getProfile().getName());
 			// FIXME: For some reason in 1.20.2-1.20.4 if the player is disconected during
 			// the configuration phase, a generic "Disconnected" is shown, instead of the
 			// disconection reason sent
-			this.connection.send(new DisconnectS2CPacket(reason));
-			this.connection.disconnect(reason);
+			this.disconnect(CONFIG.getKickMsg());
 		}
 	}
 }
