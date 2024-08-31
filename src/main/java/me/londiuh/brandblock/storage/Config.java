@@ -11,6 +11,7 @@ import java.util.List;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import net.minecraft.registry.BuiltinRegistries;
 import net.minecraft.text.Text;
 
 import static me.londiuh.brandblock.BrandBlock.LOGGER;
@@ -25,7 +26,7 @@ public class Config {
 
 	public Text getKickMsg() {
 		try {
-			return Text.Serialization.fromJson(kickMsg);
+			return Text.Serialization.fromJson(kickMsg, BuiltinRegistries.createWrapperLookup());
 		} catch (Exception ignored) {
 			return Text.of(kickMsg);
 		}
