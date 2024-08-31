@@ -25,7 +25,7 @@ public class Config {
 
 	public Text getKickMsg() {
 		try {
-			return Text.Serializer.fromJson(kickMsg);
+			return Text.Serialization.fromJson(kickMsg);
 		} catch (Exception ignored) {
 			return Text.of(kickMsg);
 		}
